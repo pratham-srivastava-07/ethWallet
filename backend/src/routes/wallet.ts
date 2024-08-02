@@ -3,7 +3,7 @@ import Web3 from "web3";
 
  export const walletRouter  = express.Router()
 
- const web3 = new Web3('https://sepolia.infura.io/v3/3c01b1ae45eb4e04865437dffbeb95dc')
+ const web3 = new Web3(`https://sepolia.infura.io/v3/${process.env.API_KEY}`)
 
 
 walletRouter.post('/create', (req, res) => {
