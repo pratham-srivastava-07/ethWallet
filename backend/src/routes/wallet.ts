@@ -1,7 +1,9 @@
 import express from "express"
 import Web3 from "web3";
-
+import dotenv from "dotenv"
  export const walletRouter  = express.Router()
+
+ dotenv.config();
 
  const web3 = new Web3(`https://sepolia.infura.io/v3/${process.env.API_KEY}`)
 
@@ -30,7 +32,7 @@ walletRouter.post('/send', async(req, res) => {
         } 
 
         const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
-        // console.log(signedTransaction);
+        console.log(signedTransaction);
         const receit = await web3.eth.sendSignedTransaction(signedTransaction.rawTransaction as string)
         res.status(200).json({receit})
     } catch(e) {
@@ -51,4 +53,3 @@ walletRouter.post('/balances/:address', async(req, res) => {
 
 
 // 0x9713BBa34E188c649efd63CC029CF634A44E1CeB
-// 0xaeb8244a8f5b8b040ecc7773272b743d4d7bd4ad559bfc10cf5ea0b0d42ce22b
