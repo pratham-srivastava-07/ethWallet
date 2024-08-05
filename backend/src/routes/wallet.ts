@@ -45,7 +45,8 @@ walletRouter.post('/balances/:address', async(req, res) => {
     try {
         const balance = await web3.eth.getBalance(address);
         const result = web3.utils.fromWei(balance, 'ether');
-        res.status(200).json({message: result});
+        const finalRes = Number(result).toFixed(5)
+        res.status(200).json({message: finalRes});
     } catch(e) {
         console.log(e);
     }
